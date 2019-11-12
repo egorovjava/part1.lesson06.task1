@@ -20,47 +20,37 @@ public class MyHttpServer implements Runnable {
 
     static final String notFound = "HTTP/1.1 404 Not Found";
 
-    static String getOutput() {
+    private static String getRequestBody() {
+
         File dir = new File(".");
         StringBuilder body = new StringBuilder();
-        body.append("<!DOCTYPE html>");
-        body.append(System.lineSeparator());
-        body.append("<html>");
-        body.append(System.lineSeparator());
-        body.append("<ol>");
-        body.append(System.lineSeparator());
+        body.append("<!DOCTYPE html>").append(System.lineSeparator())
+            .append("<html>").append(System.lineSeparator())
+            .append("<ol>").append(System.lineSeparator());
         Arrays.stream(dir.list()).forEach(x -> {
-            body.append("<li>");
-            body.append(x);
-            body.append("</li>");
-            body.append(System.lineSeparator());
+            body.append("<li>").append(x).append("</li>").append(System.lineSeparator());
         });
-        body.append("</ol>");
-        body.append(System.lineSeparator());
-        body.append("</html>");
-        String output = body.toString();
-        StringBuilder out = new StringBuilder();
-        out.append("HTTP/1.1 200 OK");
-        out.append(System.lineSeparator());
+        body.append("</ol>").append(System.lineSeparator())
+            .append("</html>");
+        return body.toString();
+    }
+
+    static String getOutput() {
+
+        String body = getRequestBody();
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm").format(new Date());
-        out.append("Date: " + timeStamp);
-        out.append(System.lineSeparator());
-        out.append("Server: MyHttpServer");
-        out.append(System.lineSeparator());
-        out.append("X-Powered-By: Java SE 1.8");
-        out.append(System.lineSeparator());
-        out.append("Last-Modified: " + timeStamp);
-        out.append(System.lineSeparator());
-        out.append("Content-Language: ru");
-        out.append(System.lineSeparator());
-        out.append("Content-Type: text/html; charset=utf-8");
-        out.append(System.lineSeparator());
-        out.append("Content-Length: " + output.getBytes().length);
-        out.append(System.lineSeparator());
-        out.append("Connection: close");
-        out.append(System.lineSeparator());
-        out.append(System.lineSeparator());
-        out.append(output);
+        StringBuilder out = new StringBuilder();
+        out.append("HTTP/1.1 200 OK").append(System.lineSeparator())
+            .append("Date: " + timeStamp).append(System.lineSeparator())
+            .append("Server: MyHttpServer").append(System.lineSeparator())
+            .append("X-Powered-By: Java SE 1.8").append(System.lineSeparator())
+            .append("Last-Modified: " + timeStamp).append(System.lineSeparator())
+            .append("Content-Language: ru").append(System.lineSeparator())
+            .append("Content-Type: text/html; charset=utf-8").append(System.lineSeparator())
+            .append("Content-Length: " + body.getBytes().length).append(System.lineSeparator())
+            .append("Connection: close").append(System.lineSeparator())
+            .append(System.lineSeparator())
+            .append(body);
 
         return out.toString();
     }
@@ -97,7 +87,7 @@ public class MyHttpServer implements Runnable {
         }
     }
 
-    void close() throws IOException {
+    void stop() throws IOException {
         isRunnable = false;
         serverSocket.close();
     }

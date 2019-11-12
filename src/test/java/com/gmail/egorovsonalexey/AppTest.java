@@ -45,7 +45,7 @@ public class AppTest
         sb.delete(sb.length() - 2, sb.length());
         assertEquals(testOutput, sb.toString());
         client.close();
-        server.close();
+        server.stop();
     }
 
     @Test
