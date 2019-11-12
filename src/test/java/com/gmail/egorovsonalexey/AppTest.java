@@ -1,4 +1,4 @@
-package part1.lesson06;
+package com.gmail.egorovsonalexey;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

@@ -1,4 +1,4 @@
-package part1.lesson06;
+package com.gmail.egorovsonalexey;
 
 import java.io.*;
 import java.net.InetSocketAddress;

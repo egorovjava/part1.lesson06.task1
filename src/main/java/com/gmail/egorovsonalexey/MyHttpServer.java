@@ -1,4 +1,4 @@
-package part1.lesson06;
+package com.gmail.egorovsonalexey;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -42,7 +42,7 @@ public class MyHttpServer implements Runnable {
         StringBuilder out = new StringBuilder();
         out.append("HTTP/1.1 200 OK");
         out.append(System.lineSeparator());
-        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm").format(new Date());
         out.append("Date: " + timeStamp);
         out.append(System.lineSeparator());
         out.append("Server: MyHttpServer");
